@@ -1,10 +1,12 @@
 backup/
-tools/
 .idea/
 samples/
 tests/
 build/
 dist/
+private/
 *.spec
 *.pyc
 *.rom
+assets.zip
+vmtools/

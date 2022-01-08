@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 
-echo "Unlocker 3.0.3 for VMware Workstation"
+echo "Unlocker 3.0.8 for VMware Workstation"
 echo "====================================="
-echo "(c) Dave Parsons 2011-21"
+echo "(c) David Parsons 2011-21"
 
 # Ensure we only use unmodified commands
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
@@ -13,6 +13,9 @@ if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root" 1>&2
    exit 1
 fi
+
+# CD to script folder
+cd "$(dirname "${BASH_SOURCE[0]}")"
 
 echo Restoring files...
 cp -pv ./backup/vmware-vmx  /usr/lib/vmware/bin/
@@ -26,6 +29,8 @@ fi
 
 echo Removing backup files...
 rm -rfv ./backup
-rm -rfv ./tools
+
+# CD to original folder
+cd -
 
 echo Finished!

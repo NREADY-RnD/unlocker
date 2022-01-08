@@ -1,14 +1,15 @@
 @echo off
 setlocal ENABLEEXTENSIONS
 echo.
-echo Unlocker 3.0.3 for VMware Workstation
+echo Unlocker 3.0.8 for VMware Workstation
 echo =====================================
-echo (c) Dave Parsons 2011-21
+echo (c) David Parsons 2011-21
 
 net session >NUL 2>&1
 if %errorlevel% neq 0 (
-    echo Administrator privileges required! 
-    exit
+    echo Administrator privileges required!
+    pause
+    exit /b
 )
 
 echo.
@@ -30,13 +31,12 @@ taskkill /F /IM vmware-tray.exe > NUL 2>&1
 
 echo.
 echo Restoring files...
-xcopy /F /Y .\backup\x64\*.* "%InstallPath%x64\"
-xcopy /F /Y .\backup\*.* "%InstallPath%"
+xcopy /F /Y /X .\backup\x64\*.* "%InstallPath%x64\"
+xcopy /F /Y /X .\backup\*.* "%InstallPath%"
 
 echo.
 echo Removing backup files...
 rd /s /q .\backup > NUL 2>&1
-rd /s /q .\tools > NUL 2>&1
 
 echo.
 echo Starting VMware services...
@@ -48,3 +48,4 @@ net start vmware-view-usbd > NUL 2>&1
 popd
 echo.
 echo Finished!
+pause
